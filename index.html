@@ -95,6 +95,40 @@ body{
   from{opacity:0; transform:translate(-50%,20px)}
   to{opacity:1; transform:translate(-50%,0)}
 }
+/* MOBILE NAV */
+.nav-toggle{
+  display:none;
+  background:none;
+  border:none;
+  font-size:26px;
+  cursor:pointer;
+}
+
+@media(max-width:768px){
+  .nav-links{
+    position:fixed;
+    top:64px;
+    left:0;
+    right:0;
+    background:#eef6f0;
+    flex-direction:column;
+    align-items:center;
+    gap:16px;
+    padding:20px 0;
+    transform:translateY(-120%);
+    transition:.35s ease;
+    z-index:999;
+  }
+
+  .nav-links.open{
+    transform:translateY(0);
+  }
+
+  .nav-toggle{
+    display:block;
+  }
+}
+
 /* NAV */
 .nav{
   position:sticky;
@@ -354,15 +388,20 @@ footer{
       </div>
       <div class="nav-name">СТАЙКО СТАЙКОВ</div>
     </div>
-    <div class="nav-links">
+
+    <div class="nav-links" id="navLinks">
       <a href="#about">За мен</a>
       <a href="#career">Професионален път</a>
       <a href="#gallery">Галерия</a>
       <a href="#video">Видео</a>
-      <a href="#contact">Контакти</a>
+      <a href="#contact">Контакт</a>
     </div>
+
+    <!-- HAMBURGER -->
+    <button class="nav-toggle" id="navToggle">☰</button>
   </div>
 </div>
+
 
 <!-- HERO -->
 <header class="hero" id="about">
@@ -628,6 +667,7 @@ footer{
     </div>
   </div>
 </section>
+
 <audio id="bgMusic" loop preload="auto">
   <source src="audio/background.mp3" type="audio/mpeg">
 </audio>
@@ -651,6 +691,13 @@ footer{
 </footer>
 
 <script>
+const navToggle = document.getElementById("navToggle");
+const navLinks = document.getElementById("navLinks");
+
+navToggle.onclick = () => {
+  navLinks.classList.toggle("open");
+};
+
 /* ACCORDION */
 document.querySelectorAll('.accordion-title').forEach(btn=>{
   btn.onclick=()=>{
