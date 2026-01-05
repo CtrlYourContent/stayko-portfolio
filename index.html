@@ -25,7 +25,76 @@ body{
   color:var(--text-main);
   line-height:1.7;
 }
+/* ===== MUSIC UI ===== */
+.music-player{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  z-index:99999;              /* винаги над всичко */
+  pointer-events:auto;
+}
 
+.music-player button{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:rgba(255,255,255,0.92);
+  border:1px solid rgba(0,0,0,0.10);
+  border-radius:999px;
+  padding:12px 18px;
+  font-size:14px;
+  cursor:pointer;
+  box-shadow:0 10px 26px rgba(0,0,0,0.18);
+  user-select:none;
+}
+
+.music-player button:active{ transform:translateY(1px); }
+
+.music-player .icon{
+  width:18px;
+  display:inline-block;
+  text-align:center;
+  font-weight:700;
+}
+
+.music-notice{
+  position:fixed;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(255,255,255,0.95);
+  padding:12px 16px;
+  border-radius:999px;
+  font-size:14px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.18);
+  z-index:99998;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  animation:fadeInUp .35s ease;
+  pointer-events:auto;
+}
+
+.music-notice button{
+  background:#ffffff;
+  border:1px solid rgba(0,0,0,0.12);
+  border-radius:999px;
+  padding:8px 12px;
+  cursor:pointer;
+  font-size:13px;
+}
+
+.music-notice.hide{
+  opacity:0;
+  transform:translate(-50%,12px);
+  pointer-events:none;
+  transition:opacity .35s ease, transform .35s ease;
+}
+
+@keyframes fadeInUp{
+  from{opacity:0; transform:translate(-50%,20px)}
+  to{opacity:1; transform:translate(-50%,0)}
+}
 /* NAV */
 .nav{
   position:sticky;
@@ -253,6 +322,18 @@ footer{
   font-size:13px;
   color:var(--text-soft);
 }
+.play-link{
+  color: inherit;
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px dashed rgba(79,154,106,.6);
+}
+
+.play-link:hover{
+  color: var(--accent-dark);
+  border-bottom-style: solid;
+}
+
 
 @media(max-width:768px){
   .gallery-slide{height:300px}
@@ -317,27 +398,56 @@ footer{
 
           <p><strong>Спектакли за деца:</strong></p>
           <ul>
-            <li>„Не си търси белята“ – реж. Ваня Иванова</li>
-            <li>„Палечка“ – реж. Ваня Сивинова</li>
-            <li>„Трите прасенца“ – реж. Лео Капон</li>
-            <li>„Необикновената принцеса“ – реж. Евелина Кьосовска</li>
-            <li>„Дивите лебеди“ – реж. Евелина Кьосовска</li>
-            <li>„Дядо Коледа, къде си?“ – реж. Евелина Кьосовска и Веселин Бойдев</li>
-            <li>„Пешеходна зона“ – реж. Евелина Кьосовска и Веселин Бойдев</li>
-            <li>„Мечо Пух“ – реж. Анна Валерия Гостанян</li>
-            <li>„Незнайко в Слънчевия град“ – реж. Елица Петкова</li>
-            <li>„Приказка за оловния войник“ – реж. Румен Караманов</li>
-            <li>„Кентървилският призрак“ – реж. Елица Петкова</li>
-            <li>„ПУК“ – реж. Димитър Стефанов</li>
-          </ul>
+  <li>„Не си търси белята“ – реж. Ваня Иванова</li>
+  <li>„Палечка“ – реж. Ваня Сивинова</li>
+  <li>„Трите прасенца“ – реж. Лео Капон</li>
+  <li>„Необикновената принцеса“ – реж. Евелина Кьосовска</li>
+  <li>„Дивите лебеди“ – реж. Евелина Кьосовска</li>
 
-          <p><strong>Спектакли за възрастни:</strong></p>
-          <ul>
-            <li>„Бомбето“ – реж. Катя Петрова</li>
-            <li>„Хамлет“ – реж. Съби Събев</li>
-            <li>„Принцът на морето и принцът на земята“ – реж. Елена Панайотова</li>
-            <li>„Апокалипсисът идва в 6 вечерта“ – реж. Лео Капон</li>
-            <li>„По ръба на небето“ – реж. Веселка Кунчева</li>
+  <li>
+    <a class="play-link"
+       href="https://pptheatre.com/bg/plays/p/409-%D0%B4%D1%8F%D0%B4%D0%BE-%D0%BA%D0%BE%D0%BB%D0%B5%D0%B4%D0%B0-%D0%BA%D1%8A%D0%B4%D0%B5-%D1%81%D0%B8"
+       target="_blank" rel="noopener">
+      „Дядо Коледа, къде си?“
+    </a>
+    – реж. Евелина Кьосовска и Веселин Бойдев
+  </li>
+
+  <li>„Пешеходна зона“ – реж. Евелина Кьосовска и Веселин Бойдев</li>
+
+  <li>
+    <a class="play-link"
+       href="https://pptheatre.com/bg/plays/p/379-%D0%BC%D0%B5%D1%87%D0%BE-%D0%BF%D1%83%D1%85"
+       target="_blank" rel="noopener">
+      „Мечо Пух“
+    </a>
+    – реж. Анна Валерия Гостанян
+  </li>
+
+  <li>„Незнайко в Слънчевия град“ – реж. Елица Петкова</li>
+  <li>„Приказка за оловния войник“ – реж. Румен Караманов</li>
+  <li>„Кентървилският призрак“ – реж. Елица Петкова</li>
+  <li>„ПУК“ – реж. Димитър Стефанов</li>
+</ul>
+
+<p><strong>Спектакли за възрастни:</strong></p>
+<ul>
+  <li>„Бомбето“ – реж. Катя Петрова</li>
+  <li>„Хамлет“ – реж. Съби Събев</li>
+  <li>„Принцът на морето и принцът на земята“ – реж. Елена Панайотова</li>
+
+  <li>
+    <a class="play-link"
+       href="https://pptheatre.com/bg/plays/p/407-%D0%B0%D0%BF%D0%BE%D0%BA%D0%B0%D0%BB%D0%B8%D0%BF%D1%81%D0%B8%D1%81%D1%8A%D1%82-%D0%B8%D0%B4%D0%B2%D0%B0-%D0%B2-%D1%88%D0%B5%D1%81%D1%82-%D0%B2%D0%B5%D1%87%D0%B5%D1%80%D1%82%D0%B0"
+       target="_blank" rel="noopener">
+      „Апокалипсисът идва в 6 вечерта“
+    </a>
+    – реж. Лео Капон
+  </li>
+
+  <li>„По ръба на небето“ – реж. Веселка Кунчева</li>
+</ul>
+
           </ul>
 
 
@@ -518,6 +628,22 @@ footer{
     </div>
   </div>
 </section>
+<audio id="bgMusic" loop preload="auto">
+  <source src="audio/background.mp3" type="audio/mpeg">
+</audio>
+
+<div class="music-notice" id="musicNotice" aria-live="polite">
+  🎵 Музиката е включена
+  <button type="button" id="noticeToggle">Пауза</button>
+</div>
+
+<div class="music-player" id="musicPlayer">
+  <button type="button" id="musicToggle" aria-pressed="false">
+    <span class="icon" id="musicIcon">▶</span>
+    <span id="musicLabel">Музика</span>
+  </button>
+</div>
+
 
 
 <footer>
@@ -547,6 +673,101 @@ const vslides=vtrack.children;
 document.getElementById('vnext').onclick=()=>{vi=(vi+1)%vslides.length;vtrack.style.transform=`translateX(-${vi*100}%)`;}
 document.getElementById('vprev').onclick=()=>{vi=(vi-1+vslides.length)%vslides.length;vtrack.style.transform=`translateX(-${vi*100}%)`;}
 </script>
+<script>
+(() => {
+  const music = document.getElementById("bgMusic");
+  const notice = document.getElementById("musicNotice");
+  const noticeToggle = document.getElementById("noticeToggle");
+
+  const toggleBtn = document.getElementById("musicToggle");
+  const icon = document.getElementById("musicIcon");
+  const label = document.getElementById("musicLabel");
+
+  let started = false;
+  let isPlaying = false;
+  let hideTimer = null;
+
+  function uiUpdate() {
+    if (isPlaying) {
+      icon.textContent = "❚❚";
+      label.textContent = "Пауза";
+      toggleBtn.setAttribute("aria-pressed", "true");
+      noticeToggle.textContent = "Пауза";
+    } else {
+      icon.textContent = "▶";
+      label.textContent = "Пусни";
+      toggleBtn.setAttribute("aria-pressed", "false");
+      noticeToggle.textContent = "Пусни";
+    }
+  }
+
+  function showNotice() {
+    notice.classList.remove("hide");
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => notice.classList.add("hide"), 3000);
+  }
+
+  async function playMusic() {
+    try {
+      music.volume = 0.4;
+      await music.play(); // може да бъде блокирано докато няма user gesture
+      isPlaying = true;
+      uiUpdate();
+    } catch (e) {
+      // Автоплей блокиран — UI остава "Пусни" и потребителя може да натисне бутона
+      isPlaying = false;
+      uiUpdate();
+    }
+  }
+
+  function pauseMusic() {
+    music.pause();
+    isPlaying = false;
+    uiUpdate();
+  }
+
+  function toggleMusic() {
+    if (!started) started = true;
+    if (music.paused) {
+      playMusic();
+      showNotice();
+    } else {
+      pauseMusic();
+      showNotice();
+    }
+  }
+
+  // ✅ Първо действие (click / scroll / key) -> опит за пускане
+  function firstGestureStart() {
+    if (started) return;
+    started = true;
+    playMusic();
+    showNotice();
+    window.removeEventListener("click", firstGestureStart);
+    window.removeEventListener("scroll", firstGestureStart);
+    window.removeEventListener("keydown", firstGestureStart);
+  }
+
+  window.addEventListener("click", firstGestureStart, { passive: true });
+  window.addEventListener("scroll", firstGestureStart, { passive: true });
+  window.addEventListener("keydown", firstGestureStart);
+
+  // ✅ И двата бутона работят винаги
+  toggleBtn.addEventListener("click", (e) => { e.stopPropagation(); toggleMusic(); });
+  noticeToggle.addEventListener("click", (e) => { e.stopPropagation(); toggleMusic(); });
+
+  // Ако таб-а стане hidden, паузирай (по-чисто поведение)
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden && !music.paused) pauseMusic();
+  });
+
+  // Начален UI
+  uiUpdate();
+})();
+</script>
+
+
+
 
 </body>
 </html>
