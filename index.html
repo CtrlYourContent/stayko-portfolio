@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Стайко Кирилов Стайков – Портфолио</title>
 
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Стайко Кирилов Стайков – Портфолио</title>
+
 <style>
 :root{
   --bg:#eef6f0;
@@ -25,85 +32,72 @@ body{
   color:var(--text-main);
   line-height:1.7;
 }
-/* ===== MUSIC UI ===== */
-.music-player{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  z-index:99999;              /* винаги над всичко */
-  pointer-events:auto;
+
+/* ================= NAV ================= */
+.nav{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(238,246,240,.95);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(0,0,0,.05);
 }
 
-.music-player button{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  background:rgba(255,255,255,0.92);
-  border:1px solid rgba(0,0,0,0.10);
-  border-radius:999px;
-  padding:12px 18px;
-  font-size:14px;
-  cursor:pointer;
-  box-shadow:0 10px 26px rgba(0,0,0,0.18);
-  user-select:none;
-}
-
-.music-player button:active{ transform:translateY(1px); }
-
-.music-player .icon{
-  width:18px;
-  display:inline-block;
-  text-align:center;
-  font-weight:700;
-}
-
-.music-notice{
-  position:fixed;
-  bottom:24px;
-  left:50%;
-  transform:translateX(-50%);
-  background:rgba(255,255,255,0.95);
+.nav-inner{
+  max-width:1200px;
+  margin:auto;
   padding:12px 16px;
-  border-radius:999px;
-  font-size:14px;
-  box-shadow:0 12px 30px rgba(0,0,0,0.18);
-  z-index:99998;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.nav-left{
   display:flex;
   align-items:center;
   gap:10px;
-  animation:fadeInUp .35s ease;
-  pointer-events:auto;
 }
 
-.music-notice button{
-  background:#ffffff;
-  border:1px solid rgba(0,0,0,0.12);
-  border-radius:999px;
-  padding:8px 12px;
-  cursor:pointer;
+.nav-logo{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  overflow:hidden;
+  border:2px solid var(--accent-dark);
+}
+
+.nav-logo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.nav-name{
+  font-weight:600;
   font-size:13px;
+  letter-spacing:.08em;
 }
 
-.music-notice.hide{
-  opacity:0;
-  transform:translate(-50%,12px);
-  pointer-events:none;
-  transition:opacity .35s ease, transform .35s ease;
+.nav-links{
+  display:flex;
+  gap:18px;
 }
 
-@keyframes fadeInUp{
-  from{opacity:0; transform:translate(-50%,20px)}
-  to{opacity:1; transform:translate(-50%,0)}
+.nav-links a{
+  text-decoration:none;
+  color:var(--text-main);
+  font-size:14px;
 }
-/* MOBILE NAV */
+
 .nav-toggle{
   display:none;
+  font-size:26px;
   background:none;
   border:none;
-  font-size:26px;
   cursor:pointer;
 }
 
+/* MOBILE NAV */
 @media(max-width:768px){
   .nav-links{
     position:fixed;
@@ -113,137 +107,78 @@ body{
     background:#eef6f0;
     flex-direction:column;
     align-items:center;
-    gap:16px;
-    padding:20px 0;
+    gap:14px;
+    padding:18px 0 22px;
     transform:translateY(-120%);
     transition:.35s ease;
     z-index:999;
   }
-
-  .nav-links.open{
-    transform:translateY(0);
-  }
-
-  .nav-toggle{
-    display:block;
-  }
+  .nav-links.open{ transform:translateY(0); }
+  .nav-toggle{ display:block; }
 }
 
-/* NAV */
-.nav{
-  position:sticky;
-  top:0;
-  z-index:100;
-  background:rgba(238,246,240,.9);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid rgba(0,0,0,.05);
-}
-.nav-inner{
-  max-width:1200px;
-  margin:auto;
-  padding:14px 20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-.nav-left{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-.nav-logo{
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  overflow:hidden;
-  border:2px solid var(--accent-dark);
-}
-.nav-logo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-.nav-name{
-  font-weight:600;
-  letter-spacing:.08em;
-  font-size:13px;
-}
-.nav-links{
-  display:flex;
-  gap:20px;
-}
-.nav-links a{
-  text-decoration:none;
-  color:var(--text-main);
-  font-size:14px;
-  position:relative;
-}
-.nav-links a::after{
-  content:"";
-  position:absolute;
-  left:0;bottom:-3px;
-  width:0;height:2px;
-  background:var(--accent-dark);
-  transition:.3s;
-}
-.nav-links a:hover::after{width:100%}
-
-/* HERO */
+/* ================= HERO ================= */
 .hero{
   min-height:100vh;
   background:
-    linear-gradient(to right,rgba(0,0,0,.55),rgba(0,0,0,.15)),
+    linear-gradient(to bottom,rgba(0,0,0,.55),rgba(0,0,0,.25)),
     url("images/logoimage.png") center/cover no-repeat;
   display:flex;
   align-items:center;
 }
+
 .hero-inner{
   max-width:1200px;
-  padding:80px 20px;
+  padding:90px 20px 70px;
   color:#fff;
 }
+
 .hero-pill{
   display:inline-block;
   padding:6px 16px;
   border-radius:999px;
   background:rgba(255,255,255,.2);
   font-size:13px;
-  margin-bottom:16px;
+  margin-bottom:14px;
 }
+
 .hero h1{
-  font-size:clamp(34px,5vw,56px);
-  margin-bottom:16px;
+  font-size:clamp(34px,6vw,54px);
+  margin-bottom:14px;
 }
+
 .hero p{
   max-width:620px;
   font-size:18px;
-  opacity:.95;
 }
 
-/* SECTIONS */
+/* ================= SECTIONS ================= */
 section{
   max-width:1200px;
   margin:auto;
-  padding:60px 20px 0;
+  padding:60px 16px 0;
 }
+
 .section-inner{
   background:var(--card);
   border-radius:var(--radius);
-  padding:40px;
+  padding:36px;
   box-shadow:var(--shadow);
 }
+
 .section-title{
   font-size:26px;
-  margin-bottom:18px;
+  margin-bottom:20px;
 }
 
-/* ACCORDION */
+/* ================= ACCORDION ================= */
 .accordion-item{
   margin-bottom:14px;
   border-radius:14px;
   overflow:hidden;
   background:#f3fbf5;
 }
+
 .accordion-title{
   width:100%;
   padding:16px 20px;
@@ -251,130 +186,154 @@ section{
   font-weight:600;
   background:#e1f3e7;
   border:none;
-  cursor:pointer;
   text-align:left;
+  cursor:pointer;
 }
+
 .accordion-content{
   max-height:0;
   overflow:hidden;
   transition:max-height .4s ease;
 }
+
 .accordion-inner{
   padding:18px 20px;
 }
-.accordion-inner p{margin-bottom:12px}
+
+.accordion-inner p{margin-bottom:10px}
 .accordion-inner ul{padding-left:18px}
 .accordion-inner li{margin-bottom:6px}
 
-/* GALLERY */
+.play-link{
+  color:inherit;
+  text-decoration:none;
+  border-bottom:1px dashed rgba(79,154,106,.6);
+}
+.play-link:hover{color:var(--accent-dark)}
+
+/* ================= GALLERY ================= */
 .gallery-wrapper{
   position:relative;
   overflow:hidden;
   border-radius:20px;
 }
+
 .gallery-track{
   display:flex;
   transition:transform .6s ease;
 }
+
 .gallery-slide{
   flex:0 0 100%;
-  height:520px;
-  background-repeat:no-repeat;
-  background-position:center;
-  background-size:contain;
-  background-color:#000;
+  height:360px;
+  background:#000 center/contain no-repeat;
 }
+
 .gallery-btn{
   position:absolute;
   top:50%;
   transform:translateY(-50%);
-  width:36px;height:36px;
+  width:36px;
+  height:36px;
   border-radius:50%;
   border:none;
   background:#fff;
   cursor:pointer;
   font-size:20px;
 }
+
 #prev{left:10px}
 #next{right:10px}
 
-/* VIDEO */
+/* ================= VIDEO ================= */
 .video-wrapper{
   position:relative;
   overflow:hidden;
   border-radius:20px;
   background:#000;
 }
+
 .video-track{
   display:flex;
   transition:transform .6s ease;
 }
+
 .video-slide{
   flex:0 0 100%;
   padding:20px;
 }
+
 .video-frame{
   position:relative;
   padding-bottom:56.25%;
 }
+
 .video-frame iframe{
   position:absolute;
   inset:0;
   width:100%;
   height:100%;
 }
-.video-btn{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  width:36px;height:36px;
-  border-radius:50%;
-  border:none;
-  background:#fff;
-  cursor:pointer;
-}
-#vprev{left:10px}
-#vnext{right:10px}
 
-/* CONTACTS */
+/* ================= CONTACT ================= */
 .contact-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:30px;
+  gap:20px;
 }
+
 .contact-box{
   background:#f3fbf5;
   border-radius:16px;
-  padding:24px;
-}
-.contact-box h3{margin-bottom:10px}
-
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:30px 20px;
-  font-size:13px;
-  color:var(--text-soft);
-}
-.play-link{
-  color: inherit;
-  text-decoration: none;
-  font-weight: 500;
-  border-bottom: 1px dashed rgba(79,154,106,.6);
+  padding:22px;
 }
 
-.play-link:hover{
-  color: var(--accent-dark);
-  border-bottom-style: solid;
+/* ================= MUSIC ================= */
+.music-player{
+  position:fixed;
+  bottom:calc(20px + env(safe-area-inset-bottom));
+  right:20px;
+  z-index:99999;
 }
 
+.music-player button{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(255,255,255,.95);
+  border:1px solid rgba(0,0,0,.1);
+  border-radius:999px;
+  padding:12px 18px;
+  cursor:pointer;
+  box-shadow:0 10px 26px rgba(0,0,0,.18);
+}
 
+.music-notice{
+  position:fixed;
+  bottom:calc(80px + env(safe-area-inset-bottom));
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(255,255,255,.95);
+  padding:10px 16px;
+  border-radius:999px;
+  display:flex;
+  gap:10px;
+  z-index:99998;
+  transition:.35s;
+}
+
+.music-notice.hide{opacity:0;pointer-events:none}
+
+/* ================= MOBILE ================= */
 @media(max-width:768px){
-  .gallery-slide{height:300px}
-  .section-inner{padding:26px}
+  .gallery-slide{height:260px}
   .contact-grid{grid-template-columns:1fr}
 }
 </style>
+</head>
+
+<body>
+
 </head>
 
 <body>
@@ -383,21 +342,16 @@ footer{
 <div class="nav">
   <div class="nav-inner">
     <div class="nav-left">
-      <div class="nav-logo">
-        <img src="images/logoimage.png" alt="Стайко Стайков">
-      </div>
+      <div class="nav-logo"><img src="images/logoimage.png"></div>
       <div class="nav-name">СТАЙКО СТАЙКОВ</div>
     </div>
-
     <div class="nav-links" id="navLinks">
       <a href="#about">За мен</a>
-      <a href="#career">Професионален път</a>
+      <a href="#career">Път</a>
       <a href="#gallery">Галерия</a>
       <a href="#video">Видео</a>
       <a href="#contact">Контакт</a>
     </div>
-
-    <!-- HAMBURGER -->
     <button class="nav-toggle" id="navToggle">☰</button>
   </div>
 </div>
@@ -666,21 +620,20 @@ footer{
       </div>
     </div>
   </div>
-</section>
-
+<!-- MUSIC -->
 <audio id="bgMusic" loop preload="auto">
   <source src="audio/background.mp3" type="audio/mpeg">
 </audio>
 
-<div class="music-notice" id="musicNotice" aria-live="polite">
+<div class="music-notice" id="musicNotice">
   🎵 Музиката е включена
-  <button type="button" id="noticeToggle">Пауза</button>
+  <button id="noticeToggle">Пауза</button>
 </div>
 
-<div class="music-player" id="musicPlayer">
-  <button type="button" id="musicToggle" aria-pressed="false">
-    <span class="icon" id="musicIcon">▶</span>
-    <span id="musicLabel">Музика</span>
+<div class="music-player">
+  <button id="musicToggle">
+    <span id="musicIcon">❚❚</span>
+    <span id="musicLabel">Пауза</span>
   </button>
 </div>
 
@@ -691,12 +644,6 @@ footer{
 </footer>
 
 <script>
-const navToggle = document.getElementById("navToggle");
-const navLinks = document.getElementById("navLinks");
-
-navToggle.onclick = () => {
-  navLinks.classList.toggle("open");
-};
 
 /* ACCORDION */
 document.querySelectorAll('.accordion-title').forEach(btn=>{
@@ -721,96 +668,40 @@ document.getElementById('vnext').onclick=()=>{vi=(vi+1)%vslides.length;vtrack.st
 document.getElementById('vprev').onclick=()=>{vi=(vi-1+vslides.length)%vslides.length;vtrack.style.transform=`translateX(-${vi*100}%)`;}
 </script>
 <script>
-(() => {
-  const music = document.getElementById("bgMusic");
-  const notice = document.getElementById("musicNotice");
-  const noticeToggle = document.getElementById("noticeToggle");
+const navToggle=document.getElementById("navToggle");
+const navLinks=document.getElementById("navLinks");
+navToggle.onclick=()=>navLinks.classList.toggle("open");
 
-  const toggleBtn = document.getElementById("musicToggle");
-  const icon = document.getElementById("musicIcon");
-  const label = document.getElementById("musicLabel");
+/* MUSIC */
+const music=document.getElementById("bgMusic");
+const toggle=document.getElementById("musicToggle");
+const icon=document.getElementById("musicIcon");
+const label=document.getElementById("musicLabel");
+const notice=document.getElementById("musicNotice");
+const noticeBtn=document.getElementById("noticeToggle");
 
-  let started = false;
-  let isPlaying = false;
-  let hideTimer = null;
+let playing=false;
 
-  function uiUpdate() {
-    if (isPlaying) {
-      icon.textContent = "❚❚";
-      label.textContent = "Пауза";
-      toggleBtn.setAttribute("aria-pressed", "true");
-      noticeToggle.textContent = "Пауза";
-    } else {
-      icon.textContent = "▶";
-      label.textContent = "Пусни";
-      toggleBtn.setAttribute("aria-pressed", "false");
-      noticeToggle.textContent = "Пусни";
-    }
-  }
+function updateUI(){
+  icon.textContent=playing?"❚❚":"▶";
+  label.textContent=playing?"Пауза":"Пусни";
+  noticeBtn.textContent=label.textContent;
+}
 
-  function showNotice() {
-    notice.classList.remove("hide");
-    clearTimeout(hideTimer);
-    hideTimer = setTimeout(() => notice.classList.add("hide"), 3000);
-  }
+function toggleMusic(){
+  if(playing){ music.pause(); }
+  else{ music.play().catch(()=>{}); }
+  playing=!playing;
+  updateUI();
+  notice.classList.remove("hide");
+  setTimeout(()=>notice.classList.add("hide"),3000);
+}
 
-  async function playMusic() {
-    try {
-      music.volume = 0.4;
-      await music.play(); // може да бъде блокирано докато няма user gesture
-      isPlaying = true;
-      uiUpdate();
-    } catch (e) {
-      // Автоплей блокиран — UI остава "Пусни" и потребителя може да натисне бутона
-      isPlaying = false;
-      uiUpdate();
-    }
-  }
+toggle.onclick=toggleMusic;
+noticeBtn.onclick=toggleMusic;
 
-  function pauseMusic() {
-    music.pause();
-    isPlaying = false;
-    uiUpdate();
-  }
-
-  function toggleMusic() {
-    if (!started) started = true;
-    if (music.paused) {
-      playMusic();
-      showNotice();
-    } else {
-      pauseMusic();
-      showNotice();
-    }
-  }
-
-  // ✅ Първо действие (click / scroll / key) -> опит за пускане
-  function firstGestureStart() {
-    if (started) return;
-    started = true;
-    playMusic();
-    showNotice();
-    window.removeEventListener("click", firstGestureStart);
-    window.removeEventListener("scroll", firstGestureStart);
-    window.removeEventListener("keydown", firstGestureStart);
-  }
-
-  window.addEventListener("click", firstGestureStart, { passive: true });
-  window.addEventListener("scroll", firstGestureStart, { passive: true });
-  window.addEventListener("keydown", firstGestureStart);
-
-  // ✅ И двата бутона работят винаги
-  toggleBtn.addEventListener("click", (e) => { e.stopPropagation(); toggleMusic(); });
-  noticeToggle.addEventListener("click", (e) => { e.stopPropagation(); toggleMusic(); });
-
-  // Ако таб-а стане hidden, паузирай (по-чисто поведение)
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden && !music.paused) pauseMusic();
-  });
-
-  // Начален UI
-  uiUpdate();
-})();
+// първи gesture
+window.addEventListener("click",()=>{ if(!playing){toggleMusic();} },{once:true});
 </script>
 
 
