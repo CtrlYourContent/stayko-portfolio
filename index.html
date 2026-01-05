@@ -1,1127 +1,454 @@
 <!DOCTYPE html>
 <html lang="bg">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Стайко Кирилов Стайков – Портфолио</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Стайко Кирилов Стайков – Портфолио</title>
 
-  <style>
-    :root{
-      --bg:#F6EEDD;
-      --paper:#ffffff;
-      --ink:#2A2A2A;
-      --muted:#6B6B6B;
-      --accent:#CFA37C;
-      --accent2:#8E6A4C;
-      --line: rgba(0,0,0,0.06);
-      --shadow: 0 18px 44px rgba(0,0,0,0.10);
-      --radius: 22px;
-      --radius-sm: 16px;
-    }
+<style>
+:root{
+  --bg:#eef6f0;
+  --card:#ffffff;
+  --accent:#b8e0c2;
+  --accent-dark:#4f9a6a;
+  --text-main:#1f2d26;
+  --text-soft:#5e7568;
+  --shadow:0 16px 40px rgba(0,0,0,.08);
+  --radius:24px;
+}
 
-    *{ box-sizing:border-box; margin:0; padding:0; }
-    body{
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--ink);
-      background: var(--bg);
-      overflow-x:hidden;
-      line-height:1.65;
-    }
+*{box-sizing:border-box;margin:0;padding:0}
 
-    /* Лека фонова текстура (не тежи) */
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      background:
-        radial-gradient(circle at 20% 10%, rgba(207,163,124,0.18), transparent 40%),
-        radial-gradient(circle at 80% 20%, rgba(142,106,76,0.12), transparent 45%),
-        radial-gradient(circle at 40% 90%, rgba(207,163,124,0.14), transparent 50%),
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.12) 0 2px, transparent 2px 10px);
-      mix-blend-mode: multiply;
-      opacity:0.55;
-      z-index:-1;
-    }
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--text-main);
+  line-height:1.7;
+}
 
-    a{ color: var(--accent2); text-decoration:none; }
-    a:hover{ text-decoration:underline; }
+/* NAV */
+.nav{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(238,246,240,.9);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(0,0,0,.05);
+}
+.nav-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:14px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.nav-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.nav-logo{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  overflow:hidden;
+  border:2px solid var(--accent-dark);
+}
+.nav-logo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.nav-name{
+  font-weight:600;
+  letter-spacing:.08em;
+  font-size:13px;
+}
+.nav-links{
+  display:flex;
+  gap:20px;
+}
+.nav-links a{
+  text-decoration:none;
+  color:var(--text-main);
+  font-size:14px;
+  position:relative;
+}
+.nav-links a::after{
+  content:"";
+  position:absolute;
+  left:0;bottom:-3px;
+  width:0;height:2px;
+  background:var(--accent-dark);
+  transition:.3s;
+}
+.nav-links a:hover::after{width:100%}
 
-    .container{ max-width:1120px; margin:0 auto; padding: 0 18px; }
+/* HERO */
+.hero{
+  min-height:100vh;
+  background:
+    linear-gradient(to right,rgba(0,0,0,.55),rgba(0,0,0,.15)),
+    url("images/logoimage.png") center/cover no-repeat;
+  display:flex;
+  align-items:center;
+}
+.hero-inner{
+  max-width:1200px;
+  padding:80px 20px;
+  color:#fff;
+}
+.hero-pill{
+  display:inline-block;
+  padding:6px 16px;
+  border-radius:999px;
+  background:rgba(255,255,255,.2);
+  font-size:13px;
+  margin-bottom:16px;
+}
+.hero h1{
+  font-size:clamp(34px,5vw,56px);
+  margin-bottom:16px;
+}
+.hero p{
+  max-width:620px;
+  font-size:18px;
+  opacity:.95;
+}
 
-    /* NAV */
-    .nav{
-      position:sticky;
-      top:0;
-      z-index:50;
-      backdrop-filter: blur(14px);
-      background: linear-gradient(to bottom, rgba(246,238,221,0.95), rgba(246,238,221,0.88));
-      border-bottom: 1px solid var(--line);
-    }
-    .nav-inner{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding: 12px 0;
-      gap:14px;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      min-width: 160px;
-    }
-    .brand-badge{
-      width:38px;
-      height:38px;
-      border-radius:999px;
-      background: rgba(255,255,255,0.9);
-      border: 1px solid var(--line);
-      box-shadow: 0 10px 24px rgba(0,0,0,0.08);
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-    }
-    .brand-badge img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-    .brand-name{
-      font-weight:700;
-      letter-spacing:0.08em;
-      font-size:12px;
-      text-transform:uppercase;
-      line-height:1.2;
-    }
-    .brand-sub{
-      font-size:12px;
-      color:var(--muted);
-      margin-top:2px;
-    }
+/* SECTIONS */
+section{
+  max-width:1200px;
+  margin:auto;
+  padding:60px 20px 0;
+}
+.section-inner{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:40px;
+  box-shadow:var(--shadow);
+}
+.section-title{
+  font-size:26px;
+  margin-bottom:18px;
+}
 
-    .nav-links{
-      display:flex;
-      align-items:center;
-      gap:18px;
-      font-size:14px;
-    }
-    .nav-links a{
-      padding: 6px 4px;
-      position:relative;
-      white-space:nowrap;
-      color: #6a4f38;
-    }
-    .nav-links a::after{
-      content:"";
-      position:absolute;
-      left:0;
-      bottom:2px;
-      width:0%;
-      height:2px;
-      background: var(--accent2);
-      transition: width .25s ease;
-      border-radius: 999px;
-    }
-    .nav-links a:hover::after{ width:100%; }
+/* ACCORDION */
+.accordion-item{
+  margin-bottom:14px;
+  border-radius:14px;
+  overflow:hidden;
+  background:#f3fbf5;
+}
+.accordion-title{
+  width:100%;
+  padding:16px 20px;
+  font-size:16px;
+  font-weight:600;
+  background:#e1f3e7;
+  border:none;
+  cursor:pointer;
+  text-align:left;
+}
+.accordion-content{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .4s ease;
+}
+.accordion-inner{
+  padding:18px 20px;
+}
+.accordion-inner p{margin-bottom:12px}
+.accordion-inner ul{padding-left:18px}
+.accordion-inner li{margin-bottom:6px}
 
-    .nav-btn{
-      display:none;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,0.85);
-      border-radius:999px;
-      padding: 8px 12px;
-      cursor:pointer;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-      font-weight:600;
-    }
+/* GALLERY */
+.gallery-wrapper{
+  position:relative;
+  overflow:hidden;
+  border-radius:20px;
+}
+.gallery-track{
+  display:flex;
+  transition:transform .6s ease;
+}
+.gallery-slide{
+  flex:0 0 100%;
+  height:520px;
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:contain;
+  background-color:#000;
+}
+.gallery-btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:36px;height:36px;
+  border-radius:50%;
+  border:none;
+  background:#fff;
+  cursor:pointer;
+  font-size:20px;
+}
+#prev{left:10px}
+#next{right:10px}
 
-    @media (max-width: 860px){
-      .nav-btn{ display:inline-flex; align-items:center; gap:8px; }
-      .nav-links{
-        position:absolute;
-        left: 18px;
-        right: 18px;
-        top: 60px;
-        display:none;
-        flex-direction:column;
-        align-items:stretch;
-        gap:8px;
-        padding: 12px;
-        background: rgba(255,255,255,0.92);
-        border:1px solid var(--line);
-        border-radius: 16px;
-        box-shadow: var(--shadow);
-      }
-      .nav-links.open{ display:flex; }
-      .nav-links a{
-        padding:10px 12px;
-        border-radius: 12px;
-        background: rgba(246,238,221,0.55);
-      }
-      .nav-links a::after{ display:none; }
-    }
+/* VIDEO */
+.video-wrapper{
+  position:relative;
+  overflow:hidden;
+  border-radius:20px;
+  background:#000;
+}
+.video-track{
+  display:flex;
+  transition:transform .6s ease;
+}
+.video-slide{
+  flex:0 0 100%;
+  padding:20px;
+}
+.video-frame{
+  position:relative;
+  padding-bottom:56.25%;
+}
+.video-frame iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+.video-btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:36px;height:36px;
+  border-radius:50%;
+  border:none;
+  background:#fff;
+  cursor:pointer;
+}
+#vprev{left:10px}
+#vnext{right:10px}
 
-    /* HERO */
-    header{ padding: 26px 0 10px; }
-    .hero{
-      display:grid;
-      grid-template-columns: 1.3fr 1fr;
-      gap: 22px;
-      align-items:stretch;
-      padding: 18px 0 8px;
-    }
-    @media (max-width: 860px){
-      .hero{ grid-template-columns:1fr; }
-    }
-    .card{
-      background: rgba(255,255,255,0.92);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-    .hero-left{
-      padding: 22px 22px 18px;
-      position:relative;
-      overflow:hidden;
-    }
-    .hero-left::before{
-      content:"";
-      position:absolute;
-      inset:-80px -60px auto auto;
-      width: 220px;
-      height: 220px;
-      background: radial-gradient(circle, rgba(207,163,124,0.35), transparent 60%);
-      transform: rotate(12deg);
-      pointer-events:none;
-    }
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 7px 12px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(246,238,221,0.55);
-      font-size:12px;
-      color: #5c4736;
-      margin-bottom: 10px;
-    }
-    .hero-title{
-      font-size: clamp(30px, 4vw, 44px);
-      line-height:1.1;
-      margin-bottom: 8px;
-      letter-spacing:-0.02em;
-    }
-    .hero-sub{
-      color: var(--muted);
-      font-size: 14px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-    .hero-text{
-      color: #3a3a3a;
-      font-size: 15px;
-      margin-bottom: 16px;
-    }
-    .hero-meta{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-bottom: 16px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .meta-chip{
-      padding: 6px 10px;
-      border-radius:999px;
-      background: rgba(255,255,255,0.75);
-      border:1px solid var(--line);
-    }
-    .btn-row{ display:flex; flex-wrap:wrap; gap:10px; }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding: 10px 16px;
-      border-radius:999px;
-      font-size:14px;
-      font-weight:600;
-      border: none;
-      cursor:pointer;
-      text-decoration:none;
-    }
-    .btn-primary{
-      background: linear-gradient(135deg, var(--accent2), var(--accent));
-      color:#fff;
-      box-shadow: 0 14px 28px rgba(142,106,76,0.35);
-    }
-    .btn-ghost{
-      background: rgba(255,255,255,0.85);
-      border: 1px solid var(--line);
-      color: var(--ink);
-    }
+/* CONTACTS */
+.contact-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+}
+.contact-box{
+  background:#f3fbf5;
+  border-radius:16px;
+  padding:24px;
+}
+.contact-box h3{margin-bottom:10px}
 
-    .hero-right{
-      padding: 16px;
-      position:relative;
-      overflow:hidden;
-    }
-    .spotlight{
-      border-radius: calc(var(--radius) - 6px);
-      border: 1px solid rgba(0,0,0,0.06);
-      overflow:hidden;
-      background:
-        radial-gradient(circle at 50% 30%, rgba(255,255,255,0.85), rgba(0,0,0,0.02)),
-        linear-gradient(to bottom, rgba(207,163,124,0.16), rgba(255,255,255,0.75));
-      min-height: 280px;
-      display:grid;
-      place-items:center;
-      position:relative;
-    }
-    .spotlight::after{
-      content:"";
-      position:absolute;
-      inset:-30px;
-      background: radial-gradient(circle at 30% 20%, rgba(207,163,124,0.25), transparent 55%);
-      pointer-events:none;
-    }
-    .spotlight-inner{
-      text-align:center;
-      padding: 26px 18px;
-      position:relative;
-      z-index:1;
-    }
-    .spotlight-title{
-      font-weight:800;
-      font-size:16px;
-      margin-bottom:8px;
-    }
-    .spotlight-sub{
-      color: var(--muted);
-      font-size:13px;
-      margin-bottom: 12px;
-    }
-    .spotlight-note{
-      display:inline-flex;
-      gap:10px;
-      align-items:center;
-      padding: 8px 12px;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.8);
-      border:1px solid var(--line);
-      font-size:13px;
-      color:#4a3a2d;
-    }
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:30px 20px;
+  font-size:13px;
+  color:var(--text-soft);
+}
 
-    /* Sections */
-    section{ padding: 16px 0; }
-    .section-card{ padding: 22px; }
-    .section-title{
-      font-size:22px;
-      margin-bottom: 6px;
-    }
-    .section-sub{
-      color: var(--muted);
-      font-size: 14px;
-      margin-bottom: 16px;
-    }
-
-    /* About grid */
-    .about-grid{
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 14px;
-    }
-    @media (max-width: 860px){
-      .about-grid{ grid-template-columns: 1fr; }
-    }
-    .mini-card{
-      background: rgba(246,238,221,0.55);
-      border:1px solid var(--line);
-      border-radius: var(--radius-sm);
-      padding: 14px 14px 12px;
-    }
-    .mini-card h3{ font-size: 14px; margin-bottom: 8px; }
-    .mini-card ul{ list-style:none; color: #3b3b3b; font-size: 14px; }
-    .mini-card li{ margin-bottom: 6px; color: #3f3f3f; }
-
-    /* Performances */
-    .filters{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-bottom: 12px;
-    }
-    .filter-btn{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,0.82);
-      padding: 8px 12px;
-      border-radius: 999px;
-      cursor:pointer;
-      font-weight:600;
-      font-size: 13px;
-      color:#4a3a2d;
-    }
-    .filter-btn.active{
-      background: rgba(207,163,124,0.22);
-      border-color: rgba(142,106,76,0.28);
-    }
-    .perf-grid{
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 12px;
-    }
-    @media (max-width: 980px){
-      .perf-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
-    }
-    @media (max-width: 620px){
-      .perf-grid{ grid-template-columns: 1fr; }
-    }
-    .perf-card{
-      background: rgba(255,255,255,0.92);
-      border:1px solid var(--line);
-      border-radius: var(--radius-sm);
-      padding: 14px 14px 12px;
-      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-      position:relative;
-      overflow:hidden;
-    }
-    .perf-card:hover{
-      transform: translateY(-2px);
-      box-shadow: 0 18px 34px rgba(0,0,0,0.12);
-      border-color: rgba(142,106,76,0.20);
-    }
-    .perf-title{
-      font-weight:800;
-      margin-bottom: 6px;
-      font-size: 15px;
-      letter-spacing: -0.01em;
-    }
-    .perf-meta{
-      color: var(--muted);
-      font-size: 13px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-    }
-    .tag{
-      display:inline-flex;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(246,238,221,0.7);
-      border:1px solid var(--line);
-      font-size:12px;
-      color:#4a3a2d;
-    }
-
-    /* Awards (по-интересни) */
-    .award-row{
-      display:grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 12px;
-    }
-    @media (max-width: 860px){
-      .award-row{ grid-template-columns: 1fr; }
-    }
-    .award{
-      padding: 14px;
-      border-radius: var(--radius-sm);
-      background: linear-gradient(180deg, rgba(246,238,221,0.70), rgba(255,255,255,0.85));
-      border: 1px solid var(--line);
-      position:relative;
-      overflow:hidden;
-    }
-    .award::before{
-      content:"";
-      position:absolute;
-      inset:auto -60px -80px auto;
-      width: 220px;
-      height: 220px;
-      background: radial-gradient(circle, rgba(207,163,124,0.35), transparent 60%);
-      transform: rotate(-12deg);
-      pointer-events:none;
-    }
-    .award-top{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      margin-bottom: 8px;
-      position:relative;
-      z-index:1;
-    }
-    .medal{
-      width:38px; height:38px;
-      border-radius: 12px;
-      display:grid; place-items:center;
-      background: rgba(255,255,255,0.86);
-      border:1px solid var(--line);
-      box-shadow: 0 10px 18px rgba(0,0,0,0.08);
-      font-size: 18px;
-    }
-    .award h3{ font-size:14px; margin:0; }
-    .award p{ font-size:13px; color: var(--muted); position:relative; z-index:1; }
-
-    /* Video slider */
-    .video-stage{
-      border-radius: var(--radius);
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.88);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .video-shell{
-      padding: 14px;
-      background:
-        radial-gradient(circle at 50% 30%, rgba(255,255,255,0.90), rgba(0,0,0,0.04));
-    }
-    .video-frame{
-      border-radius: 18px;
-      overflow:hidden;
-      border: 10px solid rgba(25,25,25,0.92); /* театрален „frame“ */
-      box-shadow: 0 20px 38px rgba(0,0,0,0.22);
-      background:#111;
-    }
-    .ratio{
-      position:relative;
-      width:100%;
-      padding-top:56.25%;
-    }
-    .ratio iframe{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      border:0;
-      display:block;
-    }
-
-    .video-caption{
-      padding: 14px 14px 16px;
-      background: rgba(246,238,221,0.55);
-      border-top: 1px solid var(--line);
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap: 12px;
-    }
-    .video-caption h3{
-      font-size: 14px;
-      margin-bottom: 6px;
-    }
-    .video-caption p{
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .carousel{
-      position:relative;
-      overflow:hidden;
-    }
-    .carousel-track{
-      display:flex;
-      transition: transform .55s ease;
-      will-change: transform;
-    }
-    .carousel-slide{
-      flex: 0 0 100%;
-      padding: 0;
-    }
-
-    .carousel-controls{
-      position:absolute;
-      inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      pointer-events:none;
-    }
-    .cbtn{
-      pointer-events:auto;
-      border:none;
-      width:40px;
-      height:40px;
-      border-radius:999px;
-      background: rgba(255,255,255,0.90);
-      border: 1px solid var(--line);
-      box-shadow: 0 14px 26px rgba(0,0,0,0.16);
-      margin: 0 12px;
-      font-size:18px;
-      cursor:pointer;
-    }
-    .dots{
-      display:flex;
-      gap:8px;
-      justify-content:center;
-      padding: 10px 0 14px;
-      background: rgba(255,255,255,0.65);
-      border-top:1px solid var(--line);
-    }
-    .dot{
-      width:8px; height:8px;
-      border-radius:999px;
-      background: rgba(0,0,0,0.25);
-      transition: width .25s ease, background .25s ease;
-    }
-    .dot.active{
-      width: 22px;
-      background: rgba(142,106,76,0.85);
-    }
-
-    /* KUKLABG */
-    .kbg-grid{
-      display:grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 14px;
-      align-items:stretch;
-    }
-    @media (max-width: 860px){
-      .kbg-grid{ grid-template-columns: 1fr; }
-    }
-
-    /* Contact */
-    .contact-grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-    @media (max-width: 860px){
-      .contact-grid{ grid-template-columns: 1fr; }
-    }
-    .contact-box{
-      padding: 14px;
-      border-radius: var(--radius-sm);
-      border:1px solid var(--line);
-      background: rgba(255,255,255,0.88);
-    }
-    .contact-box ul{ list-style:none; font-size:14px; color:#3f3f3f; }
-    .contact-box li{ margin-bottom: 8px; color: var(--muted); }
-    footer{
-      padding: 16px 0 30px;
-      color: var(--muted);
-      font-size: 12px;
-      text-align:center;
-    }
-
-    /* Reveal */
-    .reveal{
-      opacity:0;
-      transform: translateY(14px);
-      transition: opacity .9s ease, transform .9s ease;
-    }
-    .reveal.on{
-      opacity:1;
-      transform: translateY(0);
-    }
-  </style>
+@media(max-width:768px){
+  .gallery-slide{height:300px}
+  .section-inner{padding:26px}
+  .contact-grid{grid-template-columns:1fr}
+}
+</style>
 </head>
 
 <body>
-  <div class="nav">
-    <div class="container">
-      <div class="nav-inner">
-        <div class="brand">
-          <div class="brand-badge" title="Стайко Стайков">
-            <!-- Сложи тук снимка ако искаш: images/logo.jpg -->
-            <!-- Ако нямаш - остави празно или сложи placeholder -->
-            <img src="images/logo.jpg" alt="Лого">
-          </div>
-          <div>
-            <div class="brand-name">СТАЙКО СТАЙКОВ</div>
-            <div class="brand-sub">Актьор • Куклен театър</div>
-          </div>
+
+<!-- NAV -->
+<div class="nav">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <div class="nav-logo">
+        <img src="images/logoimage.png" alt="Стайко Стайков">
+      </div>
+      <div class="nav-name">СТАЙКО СТАЙКОВ</div>
+    </div>
+    <div class="nav-links">
+      <a href="#about">За мен</a>
+      <a href="#career">Професионален път</a>
+      <a href="#gallery">Галерия</a>
+      <a href="#video">Видео</a>
+      <a href="#contact">Контакти</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero" id="about">
+  <div class="hero-inner">
+    <div class="hero-pill">Актьор • Кукловод • Движение</div>
+    <h1>Стайко Кирилов Стайков</h1>
+    <p>
+      Професионален път в театъра, киното и независимите сценични форми,
+      с фокус върху съвременното куклено изкуство, физическия театър,
+      работата с обект и авторските сценични проекти.
+    </p>
+  </div>
+</header>
+
+<!-- CAREER -->
+<section id="career">
+  <div class="section-inner">
+    <h2 class="section-title">Професионален път</h2>
+
+    <div class="accordion-item">
+      <button class="accordion-title">🎭 Актьор – трупа | ДКТ Пловдив</button>
+      <div class="accordion-content">
+        <div class="accordion-inner">
+          <p><strong>Държавен куклен театър – Пловдив</strong></p>
+          <p>2020 – до момента</p>
+          <p>
+            Репертоарен актьор с участия в детски и вечерни спектакли.
+            Работа в класически и съвременни куклени и хибридни сценични форми.
+            Участия в национални и международни фестивали.
+          </p>
+          <p><strong>Подбрани спектакли:</strong></p>
+          <ul>
+            <li>„Бомбето“ – реж. Катя Петрова</li>
+            <li>„Хамлет“ – реж. Съби Събев (Beijing Puppet Art Week)</li>
+            <li>„Апокалипсисът идва в шест вечерта“ – по Георги Господинов</li>
+            <li>„Палечка“ – реж. Ваня Сивинова</li>
+            <li>„Трите прасенца“ – реж. Леонард Капон</li>
+            <li>„Необикновената принцеса“ – реж. Ева Кьосовска</li>
+            <li>„Мечо Пух“</li>
+            <li>„Незнайко в Слънчевия град“</li>
+            <li>„Кентървилският призрак“ – реж. Елица Петкова</li>
+            <li>„ПУК“ – реж. Димитър Стефанов</li>
+          </ul>
         </div>
+      </div>
+    </div>
 
-        <button class="nav-btn" id="navBtn" aria-label="Меню">
-          ☰ Меню
-        </button>
+    <div class="accordion-item">
+      <button class="accordion-title">🎬 Независими и частни проекти</button>
+      <div class="accordion-content">
+        <div class="accordion-inner">
+          <ul>
+            <li>„Демоня“ – реж. Ованес Торосян</li>
+            <li>„Фермата на животните“ – реж. Laurent Festas</li>
+            <li>„Самодива“ – реж. Михаела Андонова</li>
+            <li>„Островът на съкровищата 2.0“ – реж. Емил Йорданов</li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
-        <!-- ВАЖНО: id="work" трябва да съществува, иначе "Спектакли" няма да работи -->
-        <nav class="nav-links" id="navLinks">
-          <a href="#about">За мен</a>
-          <a href="#work">Спектакли</a>
-          <a href="#awards">Награди</a>
-          <a href="#video">Видео</a>
-          <a href="#kbg">КуклаБГ</a>
-          <a href="#screen">Кино/Реклама/Озвучаване</a>
-          <a href="#contact">Контакт</a>
-        </nav>
+    <div class="accordion-item">
+      <button class="accordion-title">🌱 КуклаБГ</button>
+      <div class="accordion-content">
+        <div class="accordion-inner">
+          <p>
+            Участник и съ-създател на платформа за съвременно куклено изкуство,
+            експериментални формати и независими сценични проекти.
+          </p>
+          <iframe
+            width="100%"
+            height="360"
+            src="https://www.youtube.com/embed/videoseries?list=PLAC6AjjM_MUQLKFU_PWVlYVOSPRtCKL6P"
+            allowfullscreen>
+          </iframe>
+        </div>
       </div>
     </div>
   </div>
+</section>
 
-  <header class="container reveal" id="about">
-    <div class="hero">
-      <div class="hero-left card">
-        <div class="pill">🎭 Актьор • Куклен актьор • Движение/Глас</div>
-        <h1 class="hero-title">Аз съм Стайко Кирилов Стайков.</h1>
-        <div class="hero-sub">Театър • кино • сценична енергия</div>
-        <p class="hero-text">
-          Портфолио с подбрани спектакли, видео откъси и проекти. Идеята е да се представи
-          работата ми ясно и модерно — без претрупване, но с достатъчно детайл за професионална оценка.
-        </p>
-
-        <div class="hero-meta">
-          <span class="meta-chip">📍 София / Пловдив</span>
-          <span class="meta-chip">🎬 Частни проекти</span>
-          <span class="meta-chip">🧩 КуклаБГ — съ-създател</span>
-        </div>
-
-        <div class="btn-row">
-          <a class="btn btn-primary" href="#work">Виж спектакли</a>
-          <a class="btn btn-ghost" href="#video">Видео портфолио</a>
-        </div>
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-inner">
+    <h2 class="section-title">Галерия</h2>
+    <div class="gallery-wrapper">
+      <div class="gallery-track" id="gtrack">
+        <div class="gallery-slide" style="background-image:url('images/image01.png')"></div>
+        <div class="gallery-slide" style="background-image:url('images/image02.png')"></div>
+        <div class="gallery-slide" style="background-image:url('images/image03.png')"></div>
+        <div class="gallery-slide" style="background-image:url('images/image04.png')"></div>
+        <div class="gallery-slide" style="background-image:url('images/image05.png')"></div>
       </div>
-
-      <aside class="hero-right card">
-        <div class="spotlight">
-          <div class="spotlight-inner">
-            <div class="spotlight-title">Кратко представяне</div>
-            <div class="spotlight-sub">Светлина, ритъм, сцена.</div>
-            <div class="spotlight-note">✨ Можем да сложим тук снимка/постер или кратък showreel</div>
-          </div>
-        </div>
-      </aside>
+      <button class="gallery-btn" id="prev">‹</button>
+      <button class="gallery-btn" id="next">›</button>
     </div>
-  </header>
+  </div>
+</section>
 
-  <main class="container">
-    <!-- ABOUT -->
-    <section class="reveal">
-      <div class="card section-card">
-        <h2 class="section-title">За мен</h2>
-        <p class="section-sub">Кратко, стегнато и лесно за прочитане.</p>
-
-        <div class="about-grid">
-          <div class="mini-card">
-            <h3>🎭 Профил</h3>
-            <ul>
-              <li>Актьор / куклен актьор</li>
-              <li>Сценично движение и глас</li>
-              <li>Проекти за деца и възрастни</li>
-            </ul>
+<!-- VIDEO -->
+<section id="video">
+  <div class="section-inner">
+    <h2 class="section-title">Видео</h2>
+    <div class="video-wrapper">
+      <div class="video-track" id="vtrack">
+        <div class="video-slide">
+          <div class="video-frame">
+            <iframe src="https://www.youtube.com/embed/Ejy9zaPbenk" allowfullscreen></iframe>
           </div>
-
-          <div class="mini-card">
-            <h3>🎓 Образование</h3>
-            <ul>
-              <li>НАТФИЗ — актьорство за куклен театър</li>
-              <li>(попълваме от CV-то)</li>
-            </ul>
-          </div>
-
-          <div class="mini-card">
-            <h3>🏛 Театри / среда</h3>
-            <ul>
-              <li>ДКТ Пловдив (попълваме)</li>
-              <li>Проекти в София</li>
-              <li>Независими участия</li>
-            </ul>
+        </div>
+        <div class="video-slide">
+          <div class="video-frame">
+            <iframe src="https://www.youtube.com/embed/Sw-LYfxsODI" allowfullscreen></iframe>
           </div>
         </div>
       </div>
-    </section>
+      <button class="video-btn" id="vprev">‹</button>
+      <button class="video-btn" id="vnext">›</button>
+    </div>
+  </div>
+</section>
 
-    <!-- WORK -->
-    <section class="reveal" id="work">
-      <div class="card section-card">
-        <h2 class="section-title">Спектакли</h2>
-        <p class="section-sub">Подредени като карти + филтри, за да не изглеждат като „стена от текст“.</p>
-
-        <div class="filters" id="filters">
-          <button class="filter-btn active" data-filter="all">Всички</button>
-          <button class="filter-btn" data-filter="kids">За деца</button>
-          <button class="filter-btn" data-filter="adult">За възрастни</button>
-          <button class="filter-btn" data-filter="private">Частни проекти</button>
-        </div>
-
-        <div class="perf-grid" id="perfGrid">
-          <!-- Примерни карти — после ги заменяме с пълния списък от CV-то -->
-          <article class="perf-card" data-tags="private">
-            <div class="perf-title">„Демоня“</div>
-            <div class="perf-meta">
-              <span class="tag">Частен проект</span>
-              <span class="tag">реж. Ованес Торосян</span>
-            </div>
-          </article>
-
-          <article class="perf-card" data-tags="adult">
-            <div class="perf-title">„Кентървилският Призрак“</div>
-            <div class="perf-meta">
-              <span class="tag">Пловдив</span>
-              <span class="tag">реж. Елица Петкова</span>
-            </div>
-          </article>
-
-          <article class="perf-card" data-tags="kids">
-            <div class="perf-title">„Пук“</div>
-            <div class="perf-meta">
-              <span class="tag">За деца</span>
-              <span class="tag">реж. Димитър Стефанов</span>
-            </div>
-          </article>
-
-          <article class="perf-card" data-tags="adult">
-            <div class="perf-title">„(пример) Спектакъл 4“</div>
-            <div class="perf-meta">
-              <span class="tag">Възрастни</span>
-              <span class="tag">реж. (име)</span>
-            </div>
-          </article>
-
-          <article class="perf-card" data-tags="kids">
-            <div class="perf-title">„(пример) Спектакъл 5“</div>
-            <div class="perf-meta">
-              <span class="tag">Деца</span>
-              <span class="tag">реж. (име)</span>
-            </div>
-          </article>
-
-          <article class="perf-card" data-tags="private">
-            <div class="perf-title">„(пример) Частен проект“</div>
-            <div class="perf-meta">
-              <span class="tag">Частен</span>
-              <span class="tag">реж. (име)</span>
-            </div>
-          </article>
-        </div>
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <h2 class="section-title">Контакти</h2>
+    <div class="contact-grid">
+      <div class="contact-box">
+        <h3>📧 E-mail</h3>
+        <p>staiko.staykov@gmail.com</p>
       </div>
-    </section>
-
-    <!-- AWARDS -->
-    <section class="reveal" id="awards">
-      <div class="card section-card">
-        <h2 class="section-title">Награди / Акценти</h2>
-        <p class="section-sub">По-„интересно“ — като отличия (карти), не сух списък.</p>
-
-        <div class="award-row">
-          <div class="award">
-            <div class="award-top">
-              <div class="medal">🏅</div>
-              <div>
-                <h3>(пример) Номинация / отличие</h3>
-                <div style="font-size:12px; color:var(--muted); margin-top:2px;">година • фестивал/институция</div>
-              </div>
-            </div>
-            <p>Кратко изречение какво е признанието и за какво е било (роля/представление/участие).</p>
-          </div>
-
-          <div class="award">
-            <div class="award-top">
-              <div class="medal">🎖️</div>
-              <div>
-                <h3>(пример) Фестивално участие</h3>
-                <div style="font-size:12px; color:var(--muted); margin-top:2px;">година • град/държава</div>
-              </div>
-            </div>
-            <p>Кратко резюме — без да се натоварва читателя, но да „звучи“ сериозно.</p>
-          </div>
-
-          <div class="award">
-            <div class="award-top">
-              <div class="medal">✨</div>
-              <div>
-                <h3>(пример) Акцент</h3>
-                <div style="font-size:12px; color:var(--muted); margin-top:2px;">проекти • колаборации</div>
-              </div>
-            </div>
-            <p>Тук можем да сложим важен акцент: участие в конкретни силни постановки, роли, партньорства.</p>
-          </div>
-        </div>
+      <div class="contact-box">
+        <h3>🎭 Театър</h3>
+        <p>Държавен куклен театър – Пловдив</p>
+        <p>Репертоарен актьор</p>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <!-- VIDEO -->
-    <section class="reveal" id="video">
-      <div class="card section-card">
-        <h2 class="section-title">Видео портфолио</h2>
-        <p class="section-sub">Слайдър като галерия. При смяна — предишното видео спира (ресет на iframe).</p>
+<footer>
+© 2026 Стайко Кирилов Стайков – Портфолио
+</footer>
 
-        <div class="video-stage">
-          <div class="carousel" id="videoCarousel">
-            <div class="carousel-track" id="videoTrack">
+<script>
+/* ACCORDION */
+document.querySelectorAll('.accordion-title').forEach(btn=>{
+  btn.onclick=()=>{
+    const c=btn.nextElementSibling;
+    c.style.maxHeight=c.style.maxHeight?null:c.scrollHeight+"px";
+  }
+});
 
-              <!-- Видео 1 -->
-              <div class="carousel-slide">
-                <div class="video-shell">
-                  <div class="video-frame">
-                    <div class="ratio">
-                      <iframe
-                        data-src="https://www.youtube.com/embed/Ejy9zaPbenk"
-                        title="Видео 1"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen
-                        loading="lazy"></iframe>
-                    </div>
-                  </div>
-                </div>
-                <div class="video-caption">
-                  <div>
-                    <h3>Видео 1 — (заглавие)</h3>
-                    <p>Кратко описание (1–2 изречения) какво показва откъсът.</p>
-                  </div>
-                  <a class="btn btn-ghost" target="_blank" rel="noopener"
-                     href="https://www.youtube.com/watch?v=Ejy9zaPbenk">Отвори в YouTube</a>
-                </div>
-              </div>
+/* GALLERY */
+let gi=0;
+const gtrack=document.getElementById('gtrack');
+const gslides=gtrack.children;
+document.getElementById('next').onclick=()=>{gi=(gi+1)%gslides.length;gtrack.style.transform=`translateX(-${gi*100}%)`;}
+document.getElementById('prev').onclick=()=>{gi=(gi-1+gslides.length)%gslides.length;gtrack.style.transform=`translateX(-${gi*100}%)`;}
 
-              <!-- Видео 2 -->
-              <div class="carousel-slide">
-                <div class="video-shell">
-                  <div class="video-frame">
-                    <div class="ratio">
-                      <iframe
-                        data-src="https://www.youtube.com/embed/Sw-LYfxsODI"
-                        title="Видео 2"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen
-                        loading="lazy"></iframe>
-                    </div>
-                  </div>
-                </div>
-                <div class="video-caption">
-                  <div>
-                    <h3>Видео 2 — (заглавие)</h3>
-                    <p>Кратко описание.</p>
-                  </div>
-                  <a class="btn btn-ghost" target="_blank" rel="noopener"
-                     href="https://www.youtube.com/watch?v=Sw-LYfxsODI">Отвори в YouTube</a>
-                </div>
-              </div>
+/* VIDEO */
+let vi=0;
+const vtrack=document.getElementById('vtrack');
+const vslides=vtrack.children;
+document.getElementById('vnext').onclick=()=>{vi=(vi+1)%vslides.length;vtrack.style.transform=`translateX(-${vi*100}%)`;}
+document.getElementById('vprev').onclick=()=>{vi=(vi-1+vslides.length)%vslides.length;vtrack.style.transform=`translateX(-${vi*100}%)`;}
+</script>
 
-              <!-- Видео 3 (пример / можеш да го махнеш или смениш) -->
-              <div class="carousel-slide">
-                <div class="video-shell">
-                  <div class="video-frame">
-                    <div class="ratio">
-                      <iframe
-                        data-src="https://www.youtube.com/embed/uT84n6iKUX4"
-                        title="КуклаБГ (пример)"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen
-                        loading="lazy"></iframe>
-                    </div>
-                  </div>
-                </div>
-                <div class="video-caption">
-                  <div>
-                    <h3>КуклаБГ — (пример видео)</h3>
-                    <p>Кратко описание.</p>
-                  </div>
-                  <a class="btn btn-ghost" target="_blank" rel="noopener"
-                     href="https://www.youtube.com/watch?v=uT84n6iKUX4">Отвори в YouTube</a>
-                </div>
-              </div>
-
-            </div>
-
-            <div class="carousel-controls">
-              <button class="cbtn" id="videoPrev" aria-label="Предишно">‹</button>
-              <button class="cbtn" id="videoNext" aria-label="Следващо">›</button>
-            </div>
-
-            <div class="dots" id="videoDots"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- KUKLABG -->
-    <section class="reveal" id="kbg">
-      <div class="card section-card">
-        <h2 class="section-title">КуклаБГ</h2>
-        <p class="section-sub">Силна секция — отделна, за да се вижда важността.</p>
-
-        <div class="kbg-grid">
-          <div class="mini-card">
-            <h3>🎬 Участник и съ-създател</h3>
-            <p style="color:var(--muted); font-size:14px;">
-              Тук описваме накратко какво е КуклаБГ и ролята на Стайко — 2–3 изречения.
-            </p>
-            <p style="margin-top:10px;">
-              <a class="btn btn-primary" target="_blank" rel="noopener"
-                 href="https://www.youtube.com/watch?v=uT84n6iKUX4&list=PLAC6AjjM_MUQLKFU_PWVlYVOSPRtCKL6P">
-                Виж плейлиста
-              </a>
-            </p>
-          </div>
-
-          <div class="video-frame" style="border-width:8px;">
-            <div class="ratio">
-              <!-- playlist embed -->
-              <iframe
-                src="https://www.youtube.com/embed/videoseries?list=PLAC6AjjM_MUQLKFU_PWVlYVOSPRtCKL6P"
-                title="КуклаБГ плейлист"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-                loading="lazy"></iframe>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SCREEN -->
-    <section class="reveal" id="screen">
-      <div class="card section-card">
-        <h2 class="section-title">Кино / Реклама / Озвучаване</h2>
-        <p class="section-sub">Подредено по категории, без да става прекалено дълго.</p>
-
-        <div class="about-grid">
-          <div class="mini-card">
-            <h3>🎬 Филми</h3>
-            <ul>
-              <li>(пример) „Доза Щастие“ — реж. Яна Титова</li>
-              <li>(добавяме от CV)</li>
-            </ul>
-          </div>
-
-          <div class="mini-card">
-            <h3>📺 Реклами</h3>
-            <ul>
-              <li>Sting Energy</li>
-              <li>The Woodsman Whisky</li>
-              <li>Фервекс</li>
-            </ul>
-          </div>
-
-          <div class="mini-card">
-            <h3>🎙 Озвучаване</h3>
-            <ul>
-              <li>Мулан (2020) — (роля)</li>
-              <li>DC — Лигата на супер-любимците</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="reveal" id="contact">
-      <div class="card section-card">
-        <h2 class="section-title">Контакт</h2>
-        <p class="section-sub">Бързо и ясно.</p>
-
-        <div class="contact-grid">
-          <div class="contact-box">
-            <h3 style="font-size:14px; margin-bottom:10px;">Професионални запитвания</h3>
-            <ul>
-              <li><strong>E-mail:</strong> <span style="color:var(--ink)">тук_имейл@пример.com</span></li>
-              <li><strong>Телефон:</strong> <span style="color:var(--ink)">+359 …</span></li>
-              <li><strong>Град:</strong> <span style="color:var(--ink)">София / Пловдив</span></li>
-            </ul>
-          </div>
-          <div class="contact-box">
-            <h3 style="font-size:14px; margin-bottom:10px;">Линкове</h3>
-            <ul>
-              <li><a target="_blank" rel="noopener" href="https://www.youtube.com/">YouTube</a></li>
-              <li><a target="_blank" rel="noopener" href="#">Instagram (ако има)</a></li>
-              <li><a target="_blank" rel="noopener" href="#">Facebook (ако има)</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer>© 2026 Стайко Кирилов Стайков — Портфолио</footer>
-  </main>
-
-  <script>
-    // Mobile nav
-    const navBtn = document.getElementById('navBtn');
-    const navLinks = document.getElementById('navLinks');
-
-    navBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
-    navLinks.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => navLinks.classList.remove('open'));
-    });
-
-    // Reveal on scroll
-    const revealEls = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add('on');
-      });
-    }, { threshold: 0.12 });
-    revealEls.forEach(el => io.observe(el));
-
-    // Filters (performances)
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const perfCards = Array.from(document.querySelectorAll('.perf-card'));
-
-    filterButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        const f = btn.dataset.filter;
-        perfCards.forEach(card => {
-          const tags = (card.dataset.tags || "").split(" ").filter(Boolean);
-          const show = (f === "all") || tags.includes(f);
-          card.style.display = show ? "" : "none";
-        });
-      });
-    });
-
-    // Video carousel with "pause previous" (reset iframe src)
-    const videoTrack = document.getElementById('videoTrack');
-    const videoSlides = Array.from(videoTrack.querySelectorAll('.carousel-slide'));
-    const dotsWrap = document.getElementById('videoDots');
-    const prev = document.getElementById('videoPrev');
-    const next = document.getElementById('videoNext');
-
-    let vIndex = 0;
-
-    function ensureLoaded(i){
-      const iframe = videoSlides[i].querySelector('iframe');
-      if (!iframe) return;
-      if (!iframe.src) iframe.src = iframe.dataset.src || "";
-    }
-
-    function stopSlide(i){
-      const iframe = videoSlides[i].querySelector('iframe');
-      if (!iframe) return;
-      // Reset src to stop playback
-      if (iframe.src){
-        const src = iframe.src;
-        iframe.src = "";
-        iframe.src = src;
-      }
-    }
-
-    function renderDots(){
-      dotsWrap.innerHTML = "";
-      videoSlides.forEach((_, i) => {
-        const d = document.createElement('div');
-        d.className = "dot" + (i === vIndex ? " active" : "");
-        d.addEventListener('click', () => goTo(i));
-        dotsWrap.appendChild(d);
-      });
-    }
-
-    function update(){
-      videoTrack.style.transform = `translateX(${-vIndex * 100}%)`;
-      Array.from(dotsWrap.children).forEach((d, i) => d.classList.toggle('active', i === vIndex));
-      ensureLoaded(vIndex);
-    }
-
-    function goTo(i){
-      if (i === vIndex) return;
-      stopSlide(vIndex);
-      vIndex = (i + videoSlides.length) % videoSlides.length;
-      update();
-    }
-
-    prev.addEventListener('click', () => goTo(vIndex - 1));
-    next.addEventListener('click', () => goTo(vIndex + 1));
-
-    // init
-    renderDots();
-    ensureLoaded(0);
-    update();
-  </script>
 </body>
 </html>
